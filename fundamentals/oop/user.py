@@ -14,12 +14,14 @@ class user:
         print(f"Age: {self.age}")
         print(f"Is rewards member: {self.is_rewards_member}")
         print(f"Gold Card Points: {self.gold_card_points}")
+        return self
     def enroll(self):
         if self.is_rewards_member:
             print("User already a member")
         else:
             self.is_rewards_member=True
             self.gold_card_points +=200
+        return self
     def spend_points(self, amount):
         if self.gold_card_points < amount:
             print(f"Insufficient Funds. Cannot make a purchase of {amount} points with a balance of {self.gold_card_points} points")
@@ -27,26 +29,14 @@ class user:
         else:
             self.gold_card_points -= amount
             print(f"New Gold Card Points Balance: {self.gold_card_points}")
+        return self
 
 
 
 samantha = user("Samantha","Maxis","samanthamaxis@gmail.com","10")
-samantha.display_info()
-samantha.enroll()
-
 edward = user("Edward","Richtofen","group935@yahoo.com","34",True,5000)
 tank = user("Tank","Dempsey","america4life@outlook.com","36",True,25)
 
-samantha.spend_points(50)
-
-edward.enroll()
-
-edward.spend_points(80)
-
-samantha.display_info()
-edward.display_info()
-tank.display_info()
-
-samantha.enroll()
-
-tank.spend_points(40)
+samantha.display_info().enroll().spend_points(80).display_info().enroll()
+edward.enroll().spend_points(80).display_info()
+tank.display_info().spend_points(40)
