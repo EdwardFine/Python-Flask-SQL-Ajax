@@ -23,13 +23,10 @@ print(z)
 
 
 def iterateDictionary(some_list):
-    for i in range(len(some_list)):
-        for key in some_list[i]:
-            print(f"{key} - {some_list[i][key]}", end="")
-            if key == "first_name":
-                print(",", end=" ")
-            elif key == "last_name":
-                print("")
+    for items in some_list:
+        for key,value in items.items():
+            print(f"{key} - {value} ",end="")
+        print("")
 
 
 students = [
