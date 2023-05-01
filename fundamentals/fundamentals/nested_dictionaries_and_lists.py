@@ -25,11 +25,12 @@ print(z)
 def iterateDictionary(some_list):
     for i in range(len(some_list)):
         for key in some_list[i]:
-            print(f"{key} - {some_list[i][key]}",end="")
+            print(f"{key} - {some_list[i][key]}", end="")
             if key == "first_name":
-                print(",",end=" ")
+                print(",", end=" ")
             elif key == "last_name":
                 print("")
+
 
 students = [
     {'first_name':  'Michael', 'last_name': 'Jordan'},
@@ -47,6 +48,7 @@ print(len(students[0]))
 # first_name - Mark, last_name - Guillen
 # first_name - KB, last_name - Tonel
 
+
 def iterateDictionary2(key_name, some_list):
     for i in range(len(some_list)):
         for key in some_list[i]:
@@ -54,8 +56,9 @@ def iterateDictionary2(key_name, some_list):
                 print(some_list[i][key])
     print("")
 
-iterateDictionary2("first_name",students)
-iterateDictionary2("last_name",students)
+
+iterateDictionary2("first_name", students)
+iterateDictionary2("last_name", students)
 
 
 def printInfo(some_dict):
@@ -65,9 +68,10 @@ def printInfo(some_dict):
             print(value)
         print("")
 
+
 dojo = {
-   'locations': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
-   'instructors': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
+    'locations': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
+    'instructors': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
 }
 printInfo(dojo)
 # output:
@@ -79,7 +83,7 @@ printInfo(dojo)
 # Tulsa
 # DC
 # Burbank
-    
+
 # 8 INSTRUCTORS
 # Michael
 # Amy
