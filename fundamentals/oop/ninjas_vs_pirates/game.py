@@ -1,5 +1,4 @@
-from classes.ninja import Ninja
-from classes.pirate import Pirate
+from classes.characters import Ninja, Pirate
 import random
 
 def printMoves():
@@ -35,6 +34,7 @@ def processMenuChoice(input,attacker,defender):
             print(f"{defender.name} dodged {attacker.name}'s light attack.")
         return True
     elif input ==2:
+        attacker.recover = True
         if not isEvaded(defender):
             attacker.heavy_attack(defender)
             print(f"{attacker.name} hit {defender.name} with a heavy attack.")
