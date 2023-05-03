@@ -3,7 +3,6 @@ class Character:
         self.name = name
     def show_stats( self ):
         print(f"Name: {self.name}\nStrength: {self.strength}\nSpeed: {self.speed}\nHealth: {self.health}\n")
-
     def light_attack( self , defender ):
         defender.health -= self.strength
         return self

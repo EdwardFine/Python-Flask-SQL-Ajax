@@ -73,13 +73,18 @@ def playerTurn():
     if checkRecover(player):
         while not successful:
             printMoves()
-            successful = processMenuChoice(int(input()),player,comp)
+            try:
+                successful = processMenuChoice(int(input()),player,comp)
+            except ValueError:
+                pass
     else:
         print(f"{player.name} is recovering after that heavy attack!")
 
 def compTurn():
+    successful = False
     if checkRecover(comp):
-        processMenuChoice(random.randint(1,4),comp,player)
+        while not successful:
+            successful = processMenuChoice(random.randint(1,4),comp,player)
     else:
         print(f"{comp.name} is recovering after that heavy attack!")
 
@@ -112,7 +117,7 @@ while True:
         player = Pirate(input("What is your pirate's name? "))
         comp = Ninja(input("What is the ninja's name? "))
         break
-    choice=input("Do you want to play as a ninja or a pirate? ").lower()
+    choice=input("Do you want to play as a ninja or a pirate? ").lower().strip()
 
 while True:
     printStats()
