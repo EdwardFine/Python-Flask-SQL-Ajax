@@ -42,7 +42,7 @@ def processMenuChoice(input,attacker,defender):
             print(f"{defender.name} dodged {attacker.name}'s heavy attack.")
         return True
     elif input ==3:
-        if(attacker.speed <=50):
+        if(attacker.speed <50):
             print(f"{attacker.name} performs some speed training.")
             attacker.increaseSpeed()
             return True
@@ -50,7 +50,7 @@ def processMenuChoice(input,attacker,defender):
             print(f"{attacker.name} has reached max speed, choose another option.")
             return False
     elif input ==4:
-        if(attacker.strength <=25):
+        if(attacker.strength <25):
             print(f"{attacker.name} performs some strength training.")
             attacker.increaseStrength()
             return True
