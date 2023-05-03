@@ -9,7 +9,6 @@ class Character:
         return self
     def heavy_attack(self,defender):
         defender.health -= self.strength *2.25
-        self.recover=True
         return self
     def increaseSpeed(self):
         self.speed += 5
