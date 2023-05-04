@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            margin:0;
+            border: 0;
+            padding: 0;
+            outline: 0;
+        }
+        .box{
+            background-color:{{py_color}};
+            border-radius: 10px;
+            border: 2px solid black;
+            width:225px;
+            height: 225px;
+            margin: 10px;
+        }
+        .text-align-center{
+            text-align: center;
+            margin: 0 auto;
+        }
+        .container{
+            width:80%;
+            margin-top: 25px;
+        }
+        .flex{
+            display: flex;
+            flex-wrap: wrap;
+            flex
+        }
+        .justify-center{
+            justify-content: center;
+        }
+    </style>
+    <title>Playground</title>
+</head>
+<body>
+    <div class="container text-align-center">
+        <h1>Welcome</h1>
+        <div class="flex justify-center">
+            <div class="flex">
+                {% for i in range (num)%}
+                    <div class="box"></div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
