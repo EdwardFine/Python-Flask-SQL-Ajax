@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Dojo Survey</title>
+</head>
+
+<body>
+    <div class="flex just-center">
+        <div class="container">
+            <h1 class="title text-align-center">Submitted Info</h1>
+            <div class="flex just-between option-spacing">
+                <label>Name:</label>
+                <h2>{{session['name']}}</h2>
+            </div>
+            <div class="flex just-between option-spacing">
+                <label>Location:</label>
+                <h2>{{session['location']}}</h2>
+            </div>
+            <div class="flex just-between option-spacing">
+                <label>Language:</label>
+                <h2>{{session['language']}}!!!</h2>
+            </div>
+            {%if session['comment'] != ""%}
+                <div class="flex just-between option-spacing overflow-wrap">
+                    <label>Comment:</label>
+                    <h2 class="overflow-wrap">{{session['comment']}}</h2>
+                </div>
+            {%endif%}
+            <form action="/">
+                <div class="flex flex-end">
+                    <button class="submit-button">Go Back</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
