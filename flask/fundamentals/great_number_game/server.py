@@ -18,10 +18,11 @@ def home():
 
 @app.route('/guess',methods=["POST"])
 def guess():
-    session["count"]+=1
     session["guess"] = request.form['guess']
     if session["guess"] == "":
         session["guess"]=0
+    else:
+        session["count"]+=1
     if int(session['guess']) < session['answer']:
         session['result'] = 'low'
     elif int(session['guess']) > session['answer']:
@@ -54,9 +55,11 @@ def processLeaderboard():
             if item['score'] > session['count']:
                 item['score'] = session['count']
                 print(leaderboard)
+                session.clear()
                 return redirect('/leaderboard')
             else:
                 print(leaderboard)
+                session.clear()
                 return redirect('/leaderboard')
     leaderboard.append({'name':session['name'],'score':session['count']})
     session.clear()
