@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Great Number Game</title>
+</head>
+<body>
+    <div class="flex just-center">
+        <div class="container text-align-center">
+            <h1>Welcome to the Great Number Game!</h1>
+            <h2>I am thinking of a number between 1 and 100.</h2>
+            <h2>Take a guess!</h2>
+            <div class="flex just-center">
+                {%if result == 'none'%}
+                {%elif result == 'low'%}
+                    <div class="response wrong">
+                        <h3>Too low</h3>
+                        <p>{{session['count']}}/5 Guesses</p>
+                    </div>
+                {%elif result == 'high'%}
+                    <div class="response wrong">
+                        <h3>Too high</h3>
+                        <p>{{session['count']}}/5 Guesses</p>
+                    </div>
+                {%elif result == 'correct'%}
+                    <div class="response correct">
+                        <h3>{{session['answer']}} was the number!</h3>
+                        <p>It only took you {{session['count']}} guesses!</p>
+                        <form action="/leaderboard_process" class="flex just-center align-center" method="post">
+                            <input type="text" name="name" placeholder="Name..." class="leaderboard-input">
+                            <button class="guess-button leaderboard-button">Submit to leaderboard</button>
+                        </form>
+                        <form action="/resetgame">
+                            <button class="guess-button play-again">Play again?</button>
+                        </form>
+                    </div>
+                {%else%}
+                    <div class="response wrong">
+                        <h3>You lost, {{session['answer']}} was the number.</h3>
+                        <form action="/resetgame">
+                            <button class="guess-button play-again">Play again?</button>
+                        </form>
+                    </div>
+                {%endif%}
+            </div>
+            {%if result != "correct" and result != "lost"%}
+                <div class="flex just-center">
+                    <form action="/guess" method="post">
+                        <input type="number" class="guess-box text-align-center" name="guess">
+                        <button class="guess-button">Make guess</button>
+                    </form>
+                </div>
+            {%endif%}
+            <div class="flex just-center">
+                <form action="/leaderboard">
+                    <button class="guess-button">View Leaderboard</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
