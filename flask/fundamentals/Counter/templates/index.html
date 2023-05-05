@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <style>
+        .container{
+            width: 80%;
+            text-align: center;
+        }
+        .flex{
+            display: flex;
+            align-items: center;
+        }
+        .justify-center{
+            justify-content: center;
+        }
+        .justify-between{
+            justify-content: space-evenly;
+        }
+        .reset-button{
+            padding: 10px;
+            background-color: red;
+            margin: 20px;
+            font-size: 2em;
+            border-radius: 20px;
+        }
+        .count-button{
+            padding: 10px;
+            background-color: blue;
+            color:white;
+            margin: 20px;
+            font-size: 2em;
+            border-radius: 20px;
+        }
+        .count-input{
+            display: block;
+            margin-left: 2em;
+            height: 1em;
+            width: 4em;
+            font-size: 2em;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex justify-center">
+        <div class="container">
+            <h1>Counter</h1>
+            <h2>Page Visits: {{session["page_count"]}}</h2>
+            <h2>Counter: {{session["count"]}}</h2>
+            <div class="flex justify-between">
+                <form action="/count" method="post">
+                    <div>
+                        <input type="number" name="count" class="count-input" value="">
+                        <button class="count-button">Submit Count</button>
+                    </div>
+                </form>
+                <form action="/reset" method="post">
+                    <button class="reset-button">Reset</button>
+                </form>
+            </div>
+            <div class="flex justify-center" >
+                <form action="/count_2" method="post">
+                    <button class="count-button">Count 2!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
