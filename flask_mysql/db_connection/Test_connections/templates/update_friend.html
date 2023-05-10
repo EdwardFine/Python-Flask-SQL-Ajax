@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Friend</title>
+</head>
+<body>
+    <h1>Editing for {{friend.first_name}} {{friend.last_name}} </h1>
+    <form action="/edit_friend/{{friend.id}}" method="post">
+        <label for="first_name">First Name:</label>
+        <input type="text" name="first_name" value="{{friend.first_name}}" placeholder="{{friend.first_name}}">
+        <label for="last_name">Last Name:</label>
+        <input type="text" name="last_name" value="{{friend.last_name}}" placeholder="{{friend.last_name}}">
+        <label for="occupation">Occupation:</label>
+        <input type="text" name="occupation" value="{{friend.occupation}}" placeholder="{{friend.occupation}}">
+        <input type="submit" value="Update Friend!">
+    </form>
+</body>
+</html>

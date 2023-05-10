@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        {%for friend in friends%}
+            {{friend.first_name}} {{friend.last_name}}. 
+            <a href="/show_friend/{{friend.id}}">Show details</a>
+            <a href="/update_friend/{{friend.id}}">Edit Friend</a>
+            <a href="/delete_friend/{{friend.id}}">Delete Friend</a><br>
+        {%endfor%}
+    </p>
+    <div>
+        <form action="/add_friend" method="post">
+            <label for="first_name">First Name:</label>
+            <input type="text" name="first_name">
+            <label for="last_name">Last Name:</label>
+            <input type="text" name="last_name">
+            <label for="occupation">Occupation:</label>
+            <input type="text" name="occupation">
+            <input type="submit" value="Create Friend!">
+        </form>
+    </div>
+    <div>
+    </div>
+</body>
+</html>
