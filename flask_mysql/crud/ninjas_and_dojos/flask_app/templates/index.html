@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Ninjas And Dojos</title>
+</head>
+
+<body>
+    <div class="flex just-center">
+        <div class="container">
+            <div class="header">
+                All Dojos
+            </div>
+            <div class="flex just-between">
+                <div class="flex flex-col align-center">
+                    <div class="create-background">
+                        <h1 class="create-header">Create a Dojo</h1>
+                        <div class="flex just-center">
+                            <form action="/create_dojo" method="post">
+                                <label for="name">Dojo Name:</label>
+                                <input type="text" name="name">
+                                <input type="submit" value="Add Dojo">
+                            </form>
+                        </div>
+                    </div>
+                    <form action="/add_ninja/0">
+                        <input type="submit" value="Add A Ninja" style="margin-top:1em">
+                    </form>
+                </div>
+
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Dojo Name</th>
+                            <th scope="col">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for dojo in dojos%}
+                        <tr>
+                            <td>{{dojo.id}}</td>
+                            <td>{{dojo.name}}</td>
+                            <td><a href="/show_dojo/{{dojo.id}}">Show Ninjas</a> | <a href="/update_dojo/{{dojo.id}}">Edit</a> | <a href="/delete_dojo/{{dojo.id}}">Delete</a></td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            
+            {%if delete_success == False%}
+            <div class="header">
+                Could not delete Dojo; in order to delete dojo please remove all ninjas first.
+            </div>
+            {%endif%}
+        </div>
+    </div>
+</body>
+
+</html>
