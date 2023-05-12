@@ -12,8 +12,15 @@ def process_email():
         return redirect('/')
     else:
         Email.create_email(request.form)
+        session['email'] = request.form['email']
         return redirect('/all_emails')
 
 @app.route('/all_emails')
 def display_emails():
-    return render_template("all_emails.html",emails = Email.get_all(), length = len(Email.get_all()))
+    return render_template("all_emails.html",emails = Email.get_all(), new_email = session['email'])
+
+@app.route('/delete_email/<int:id>')
+def delete_email(id):
+    Email.delete_email({'id':id})
+    session['email']= None
+    return redirect('/all_emails')

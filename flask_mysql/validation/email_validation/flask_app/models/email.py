@@ -40,3 +40,11 @@ class Email:
         """
         result = connectToMySQL(cls.DB).query_db(query,data)
         return result
+    @classmethod
+    def delete_email(cls,data):
+        query = """
+        DELETE FROM emails
+        WHERE id = %(id)s;
+        """
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        return result
