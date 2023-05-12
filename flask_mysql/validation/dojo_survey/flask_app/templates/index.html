@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Dojo Survey</title>
+</head>
+
+<body>
+    <div class="flex just-center">
+        <div class="container">
+            <h1 class="title text-align-center">Dojo Survey</h1>
+            {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
+                {% if messages %}                            <!-- check if there are any messages -->
+                    {% for message in messages %}            <!-- loop through the messages -->
+                        <h2 style="color:red; text-align:center;">{{message}}</h2>                   <!-- display each message in a paragraph tag -->
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form action="/process" method="post">
+                <div class="flex just-between option-spacing">
+                    <label for="name">Your Name:</label>
+                    <input type="text" name="name" class="survey-info">
+                </div>
+                <div class="flex just-between option-spacing">
+                    <label for="location">Dojo Location:</label>
+                    <select name="location" class="survey-info">
+                        <option disabled selected value="#" class="select-info">Location</option>
+                        <option value="Chicago" class="select-info">Chicago</option>
+                        <option value="Seattle" class="select-info">Seattle</option>
+                        <option value="Online" class="select-info">Online</option>
+                        <option value="Burbank" class="select-info">Burbank</option>
+                        <option value="Bellevue" class="select-info">Bellevue</option>
+                    </select>
+                </div>
+                <div class="flex just-between option-spacing">
+                    <label for="language">Favorite Language:</label>
+                    <select name="language" class="survey-info">
+                        <option disabled selected value="#" class="select-info">Language</option>
+                        <option value="HTML" class="select-info">HTML</option>
+                        <option value="CSS" class="select-info">CSS</option>
+                        <option value="Javascript" class="select-info">Javascript</option>
+                        <option value="Python" class="select-info">Python</option>
+                        <option value="C#" class="select-info">C#</option>
+                    </select>
+                </div>
+                <label for="comment">Comment(optional)</label>
+                <textarea name="comment" class="comment" cols="30" rows="6"></textarea>
+                <div class="flex flex-end">
+                    <button class="submit-button">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
