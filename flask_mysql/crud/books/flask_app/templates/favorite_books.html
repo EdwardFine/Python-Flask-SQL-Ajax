@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Authors</title>
+</head>
+
+<body>
+    <h1 class="title text-align-center" style="margin-top:1em;">{{author.name}} favorites</h1>
+    <div class="flex just-center container">
+        <div class="add-box">
+            <h1 class="title text-align-center" style="color:darkcyan">Add Book to an author's favorite</h1>
+            <form action="/process_add_author_favorite/{{author.id}}" method="post">
+                {%if books%}
+                <select name="book_id" id="">
+                    {%for book in books%}
+                        <option value="{{book.id}}">{{book.title}}</option>
+                    {%endfor%}
+                </select>
+                <div class="flex just-end">
+                    <input type="submit" value="Add Book To Author's Favorite">
+                </div>
+                {%else%}
+                <h1>No more Books</h1>
+                {%endif%}
+            </form>
+        </div>
+        <div class="display-box">
+            <h1 class="title text-align-center" style="color:gold">Favorited By:</h1>
+            <ul>
+                {%for book in fav_books%}
+                    <li>{{book.title}}</li>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+    <div class="flex just-center" style="margin-top:2em;">
+        <a href="/authors"><input type="submit" value="Back To Authors"></a>
+    </div>
+</body>
+
+</html>

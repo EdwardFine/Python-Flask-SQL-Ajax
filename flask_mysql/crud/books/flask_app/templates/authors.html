@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Books</title>
+</head>
+
+<body>
+    <h1 class="title text-align-center" style="margin-top:1em;">Authors</h1>
+    <div class="flex just-center container">
+        <div class="add-box">
+            <h1 class="title text-align-center" style="color:gold">Add an Author</h1>
+            <form action="/create_author" method="post">
+                <div class="flex just-between align-center">
+                    <label for="name">Name:</label>
+                    <input type="text" name="name">
+                </div>
+                <div class="flex just-end">
+                    <input type="submit" value="Add Author">
+                </div>
+            </form>
+        </div>
+        <div class="display-box">
+            <h1 class="title text-align-center" style="color:rgb(0, 104, 104)">All authors</h1>
+            <ul>
+                {%for author in authors%}
+                    <li><a href="/display_authors_favorites/{{author.id}}">{{author.name}}</a></li>
+                {%endfor%}
+            </ul>
+        </div>
+    </div>
+    <div class="flex just-center" style="margin-top:2em;">
+        <a href="/books"><input type="submit" value="Books"></a>
+    </div>
+</body>
+
+</html>
