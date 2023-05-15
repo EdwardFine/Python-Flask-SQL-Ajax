@@ -35,8 +35,8 @@ class Book:
                 'id':book['id'],
                 'title':book['title'],
                 'num_of_pages':book['num_of_pages'],
-                'created_at':book['authors.created_at'],
-                'updated_at':book['authors.updated_at']
+                'created_at':book['books.created_at'],
+                'updated_at':book['books.updated_at']
             }
             books_fav.append(cls(book_data))
         return books_fav
