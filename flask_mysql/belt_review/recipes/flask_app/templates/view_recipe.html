@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>View Recipe</title>
+</head>
+
+<body>
+    <h1 class="title text-align-center" style="color:rgb(197, 144, 11); margin-top:2em;">{{recipe['recipe'].name}}</h1>
+    <div class="flex just-end" style="gap:5em;width:90%">
+        <a href="/signout"><input type="submit" value="Sign Out"></a>
+    </div>
+    <div class="flex just-center">
+        <div class="container flex just-center">
+            <form action="/dashboard" class="flex just-between" style="width:100%; gap:5em;">
+                <div class="left-side">
+                    <div class="flex just-between">
+                        <label>Description:</label>
+                        <div class="recipe-info">
+                            {{recipe['recipe'].description}}
+                        </div>
+                    </div>
+                    <div class="flex just-between">
+                        <label>Instructions:</label>
+                        <div class="recipe-info">
+                            {{recipe['recipe'].instruction}}
+                        </div>
+                    </div>
+                    <div class="flex just-between">
+                        <label>Date Made:</label>
+                        <div class="recipe-info">
+                            {{recipe['recipe'].date_made}}
+                        </div>
+                    </div>
+                    <div class="flex just-between">
+                        <label>Under 30 Minutes?</label>
+                        <div class="recipe-info">
+                            {{recipe['recipe'].under_30}}
+                        </div>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <div class="flex just-between">
+                        <label>User Name: </label>
+                        <div class="recipe-info">
+                            {{recipe['user'].first_name}} {{recipe['user'].last_name}}
+                        </div>
+                    </div>
+                    <div class="flex just-between">
+                        <label>Date Posted</label>
+                        <div class="recipe-info">
+                            {{recipe['recipe'].created_at}}
+                        </div>
+                    </div>
+                    <div class="flex just-between">
+                        <label>Date Updated</label>
+                        <div class="recipe-info">
+                            {{recipe['recipe'].updated_at}}
+                        </div>
+                    </div>
+                    <div class="flex just-end">
+                        <input type="submit" value="Go Back">
+                    </div>
+                </div>
+        </div>
+        </form>
+    </div>
+    </div>
+</body>
+
+</html>

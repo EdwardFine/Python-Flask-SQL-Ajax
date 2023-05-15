@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Update Recipe</title>
+</head>
+
+<body>
+    <h1 class="title text-align-center" style="color:rgb(197, 144, 11); margin-top:2em;">Add a New Recipe!</h1>
+    <div class="flex just-end" style="gap:5em;width:90%">
+        <a href="/dashboard"><input type="submit" value="Go Back"></a>
+        <a href="/signout"><input type="submit" value="Sign Out"></a>
+    </div>
+    {% with messages = get_flashed_messages() %}    
+    {% if messages %}
+    <div class="flex just-center">                           
+        <div class="flash-box">
+            {% for message in messages %}            
+            <p class="flash-message">{{message}}</p>                   
+            {% endfor %}
+        </div>
+    </div> 
+    {% endif %}
+    {% endwith %}
+    <div class="flex just-center">
+        <div class="container flex just-center">
+            <form action="/process_update_recipe/{{recipe['recipe'].id}}" method="post" class="flex just-between" style="width:100%; gap:5em;">
+                <div class="left-side">
+                    <div class="flex just-between">
+                        <label for="name">Recipe Name:</label>
+                        <input type="text" name="name" value="{{recipe['recipe'].name}}" placeholder="{{recipe['recipe'].name}}">
+                    </div>
+                    <div class="flex just-between">
+                        <label for="description">Description:</label>
+                        <textarea name="description" cols="75" rows="10">{{recipe['recipe'].description}}</textarea>
+                    </div>
+                    <div class="flex just-between">
+                        <label for="instruction">Instructions:</label>
+                        <textarea name="instruction" cols="75" rows="10">{{recipe['recipe'].instruction}}</textarea>
+                    </div>
+                </div>
+                <div class="right-side">
+                    <div class="flex just-between">
+                        <label for="date_made">Date Cooked/Made:</label>
+                        <input type="date" name="date_made" style="width:50%;" value="{{recipe['recipe'].date_made}}">
+                    </div>
+                    <div class="flex just-between">
+                        <label>Under 30 Minutes?</label>
+                        {%if recipe['recipe'].under_30 == True%}
+                        <label for="under_true">Yes</label>
+                        <input type="radio" name="under_30" value="True" id="under_true" checked="checked">
+                        <label for="under_false">No</label>
+                        <input type="radio" name="under_30" value="False" id="under_false">
+                        {%else%}
+                        <label for="under_true">Yes</label>
+                        <input type="radio" name="under_30" value="True" id="under_true" checked="checked">
+                        <label for="under_false">No</label>
+                        <input type="radio" name="under_30" value="False" id="under_false" checked="checked">
+                        {%endif%}
+                    </div>
+                    <div class="flex just-end align-end" style="margin-top:5em;">
+                        <input type="submit" value="Update Recipe">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
