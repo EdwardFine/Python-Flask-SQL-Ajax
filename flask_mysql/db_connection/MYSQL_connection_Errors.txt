@@ -1,0 +1,4 @@
+RuntimeError: 'cryptography' package is required for sha256_password or caching_sha2_password auth methods: Wrong Username
+pymysql.err.OperationalError: (1045, "Access denied for user 'root'@'localhost' (using password: YES)") : Wrong Password
+TypeError: 'bool' object is not subscriptable: Pretty much any error that causes a return of false. Mainly the query not working due to no data passing through.
+AttributeError: 'User' object has no attribute 'id': if the Class does not have the attribute, then raises this error
