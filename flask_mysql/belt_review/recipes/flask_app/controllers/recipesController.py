@@ -60,6 +60,8 @@ def update_recipe(recipe_id):
 def process_update_recipe(recipe_id):
     user = Recipe.get_recipe_by_id({'id':recipe_id})
     if session['user_id'] == user['user'].id:
+        if not Recipe.validate_recipe(request.form):
+            return redirect(f'/update_recipe/{recipe_id}')
         recipe_data = {
             'id':recipe_id,
             'name':request.form['name'],
