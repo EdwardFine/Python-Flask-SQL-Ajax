@@ -26,36 +26,6 @@ class Recipe:
         for recipe in result:
             recipe_data = {
                 'id':recipe['id'],
-            }
-            recipes.append(cls(recipe))
-        return recipes
-from flask import flash
-from flask_app.config.mysqlconnections import connectToMySQL
-
-class Recipe:
-    DB = "recipe_schema"
-    def __init__(self,data):
-        self.id = data['id']
-        self.user_id = data['user_id']
-        self.name = data['name']
-        self.description = data['description']
-        self.instruction = data['instruction']
-        self.under_30 = bool(data['under_30'])
-        self.date_made = data['date_made']
-        self.created_at = data['created_at']
-        self.updated_at = data['updated_at']
-    
-    @classmethod
-    def get_all_recipes_and_users(cls):
-        query="""
-        SELECT * FROM recipes
-        LEFT JOIN users on users.id = recipes.user_id;
-        """
-        result = connectToMySQL(cls.DB).query_db(query)
-        recipes = []
-        for recipe in result:
-            recipe_data = {
-                'id':recipe['id'],
                 'user_id':recipe['user_id'],
                 'name':recipe['name'],
                 'description':recipe['description'],
