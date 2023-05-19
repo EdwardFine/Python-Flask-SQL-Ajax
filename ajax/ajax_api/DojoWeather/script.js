@@ -5,7 +5,7 @@ var unit_selector = document.querySelector("#unit");
 var days = document.querySelectorAll(".day-text");
 
 async function getWeather(){
-    var res = await fetch('http://api.openweathermap.org/data/2.5/forecast?id=5392171&appid=d5b068b8e3943ebb387ab8a12335bbfa');
+    var res = await fetch('http://api.openweathermap.org/data/2.5/forecast?id=5392171&appid={{REDACTED}}');
     var weather = await res.json();
     console.log(weather);
     var temps = [[],[]];
@@ -19,7 +19,7 @@ getWeather();
 
 async function setUnit(element){
     if(element.value != unit_value){
-        var res = await fetch('http://api.openweathermap.org/data/2.5/forecast?id=5392171&appid=d5b068b8e3943ebb387ab8a12335bbfa');
+        var res = await fetch('http://api.openweathermap.org/data/2.5/forecast?id=5392171&appid={{REDACTED}}');
         var weather = await res.json();
         if(element.value == "°C"){
             for(var i=0;i<hotTemps.length;i++){
