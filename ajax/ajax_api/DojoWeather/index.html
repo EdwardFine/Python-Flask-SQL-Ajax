@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>DojoWeather</title>
+</head>
+
+<body>
+
+    <div class="navbar just-between align-center row">
+        <h1 class="title">DojoWeather</h1>
+        <div class="row align-center switch-city">
+            <p class="switch-city-text" onclick="alert('Loading weather report')">Burbank</p>
+            <p class="switch-city-text" onclick="alert('Loading weather report')">Chicago</p>
+            <p class="switch-city-text" onclick="alert('Loading weather report')">Dallas</p>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="center">
+
+            <div class="row bot-border just-between align-center">
+                <h2>San Jose</h2>
+                <div class="row align-center">
+                    <p>show temperature in </p>
+                    <select name="degrees" id="unit" onchange="setUnit(this)">
+                        <option>°F</option>
+                        <option>°C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="weather">
+                    <h1 class="day-text">Today</h1>
+                    <img src="assets/some_rain.png" class="weather-icon" alt="Rainy">
+                    <h2 class="weather-text">some rain</h2>
+                    <div class="row just-between">
+                        <h2 class="weather-text hot">75°</h2>
+                        <h2 class="weather-text cold">65°</h2>
+                    </div>
+                </div>
+                <div class="weather">
+                    <h1 class="day-text">Tomorrow</h1>
+                    <img src="assets/some_sun.png" class="weather-icon" alt="Sunny">
+                    <h2 class="weather-text">some sun</h2>
+                    <div class="row just-between">
+                        <h2 class="weather-text hot">80°</h2>
+                        <h2 class="weather-text cold">66°</h2>
+                    </div>
+                </div>
+                <div class="weather">
+                    <h1 class="day-text">Friday</h1>
+                    <img src="assets/some_clouds.png" class="weather-icon" alt="Cloudy">
+                    <h2 class="weather-text">some clouds</h2>
+                    <div class="row just-between">
+                        <h2 class="weather-text hot">69°</h2>
+                        <h2 class="weather-text cold">61°</h2>
+                    </div>
+                </div>
+                <div class="weather">
+                    <h1 class="day-text">Saturday</h1>
+                    <img src="assets/some_sun.png" class="weather-icon" alt="Sunny">
+                    <h2 class="weather-text">some sun</h2>
+                    <div class="row just-between">
+                        <h2 class="weather-text hot">78°</h2>
+                        <h2 class="weather-text cold">70°</h2>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row align-center full-border just-between fixed">
+                <img src="assets/cookie.png" alt="Cookie" class="cookie-img">
+                <div>
+                    <h1>Stop! Cookie time</h1>
+                    <p>
+                        We use cookies (sadly not the edible ones) to personalize
+                        content and ads, to provide social media features and to <br>
+                        analyse our traffic. <a href="#">Read more...</a>
+                    </p>
+                </div>
+                <button class="accept-button full-border" onclick="acceptCookie(this)">I Accept</button>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script src="script.js"></script>
+</body>
+
+</html>
