@@ -14,6 +14,7 @@ class Request:
         self.updated_at = data['updated_at']
         self.user = ""
         self.game = ""
+        self.likeCount = 0
     
     @staticmethod
     def validate_request(data):
@@ -107,3 +108,14 @@ class Request:
         """
         results = connectToMySQL(cls.DB).query_db(query,data)
         return results
+    
+    def getLikeCount(self):
+        query=f"SELECT isLiked FROM request_likes WHERE request_id ={self.id} ;"
+        results = connectToMySQL(Request.DB).query_db(query)
+        count=0
+        for like in results:
+            if like['isLiked']==1:
+                count+=1
+            else:
+                count -=1
+        return count

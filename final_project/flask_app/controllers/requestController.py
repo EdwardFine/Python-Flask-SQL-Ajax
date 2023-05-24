@@ -93,3 +93,33 @@ def update_request(request_id):
         else:
             Request.updateRequestById(request_data)
             return redirect(f'/view_request/{request_id}')
+
+@app.route('/add_like/<int:request_id>')
+def add_like(request_id):
+    if session['user_id']==0:
+        return redirect('/login_form')
+    activeUser=User.get_one_user_by_id({'id':session['user_id']})
+    if len(activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id}))==0:
+        User.addLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':1})
+        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==0:
+        User.updateLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':1})
+        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==1:
+        User.removeLike({'user_id':session['user_id'],'request_id':request_id})
+        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+
+@app.route('/add_dislike/<int:request_id>')
+def add_dislike(request_id):
+    if session['user_id']==0:
+        return redirect('/login_form')
+    activeUser=User.get_one_user_by_id({'id':session['user_id']})
+    if len(activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id}))==0:
+        User.addLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':0})
+        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==1:
+        User.updateLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':0})
+        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==0:
+        User.removeLike({'user_id':session['user_id'],'request_id':request_id})
+        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")

@@ -53,17 +53,43 @@
             <a href="/view_request/{{request.id}}" class="flex just-center" style="text-decoration: none;">
                 <div class="request-box flex" style="gap:1em">
                     <div class="flex-column align-center just-between">
-                        <form action="">
+                        {%if session['user_id']==0 or user.checkLiked({'user_id':user.id,'request_id':request.id})|length == 0%}
+                        <form action="/add_like/{{request.id}}">
                             <button class="like-button">
                                 <img src="{{url_for('static',filename='imgs/up-arrow-hollow.png')}}" alt="up-arrow" style="width:2.5em">
                             </button>
                         </form>
-                        <span class="like-count">0</span>
-                        <form action="">
+                        <span class="like-count">{{request.getLikeCount()}}</span>
+                        <form action="/add_dislike/{{request.id}}">
                             <button class="like-button">
                                 <img src="{{url_for('static',filename='imgs/down-arrow-hollow.png')}}" alt="up-arrow" style="width:2.5em;">
                             </button>
                         </form>
+                        {%elif user.checkLiked({'user_id':user.id,'request_id':request.id})[0]['isLiked'] == 1%}
+                        <form action="/add_like/{{request.id}}">
+                            <button class="like-button">
+                                <img src="{{url_for('static',filename='imgs/up-arrow-full.png')}}" alt="up-arrow" style="width:2.5em">
+                            </button>
+                        </form>
+                        <span class="like-count">{{request.getLikeCount()}}</span>
+                        <form action="/add_dislike/{{request.id}}">
+                            <button class="like-button">
+                                <img src="{{url_for('static',filename='imgs/down-arrow-hollow.png')}}" alt="up-arrow" style="width:2.5em;">
+                            </button>
+                        </form>
+                        {%elif user.checkLiked({'user_id':user.id,'request_id':request.id})[0]['isLiked']==0%}
+                        <form action="/add_like/{{request.id}}">
+                            <button class="like-button">
+                                <img src="{{url_for('static',filename='imgs/up-arrow-hollow.png')}}" alt="up-arrow" style="width:2.5em">
+                            </button>
+                        </form>
+                        <span class="like-count">{{request.getLikeCount()}}</span>
+                        <form action="/add_dislike/{{request.id}}">
+                            <button class="like-button">
+                                <img src="{{url_for('static',filename='imgs/down-arrow-full.png')}}" alt="up-arrow" style="width:2.5em;">
+                            </button>
+                        </form>
+                        {%endif%}
                     </div>
                     <div>
                         <div class="request-header">

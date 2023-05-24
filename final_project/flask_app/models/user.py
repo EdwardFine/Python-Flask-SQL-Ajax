@@ -102,3 +102,38 @@ class User:
             return cls(result[0])
         except IndexError:
             return result
+    
+    def checkLiked(self,data):
+        query="""
+        SELECT isLiked FROM request_likes
+        WHERE user_id=%(user_id)s AND request_id = %(request_id)s;
+        """
+        result = connectToMySQL(User.DB).query_db(query,data)
+        return result
+    
+    @classmethod
+    def addLike(cls,data):
+        query="""
+        INSERT INTO request_likes(user_id,request_id,isLiked)
+        VALUES (%(user_id)s,%(request_id)s,%(likeValue)s);
+        """
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        return result
+
+    @classmethod
+    def updateLike(cls,data):
+        query="""
+        UPDATE request_likes SET isLiked = %(likeValue)s
+        WHERE user_id = %(user_id)s AND request_id = %(request_id)s;
+        """
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        return result
+    
+    @classmethod
+    def removeLike(cls,data):
+        query="""
+        DELETE FROM request_likes
+        WHERE user_id = %(user_id)s AND request_id = %(request_id)s;
+        """
+        result = connectToMySQL(cls.DB).query_db(query,data)
+        return result
