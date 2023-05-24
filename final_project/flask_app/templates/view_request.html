@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>View Request</title>
+</head>
+
+<body>
+    <input type="hidden" value="{{request.game.id}}" id="id">
+    <div class="navbar">
+        <a href="/" style="text-decoration: none;">
+            <h1><span style="color:rgb(133, 111, 255)">Fan</span><span style="color:rgb(0, 163, 41)">Requests</span>
+            </h1>
+        </a>
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Seach For Games">
+            <button>
+                <img src="{{url_for('static',filename='imgs/search-magnifying-glass.png')}}" alt="Search"
+                    style="width:25px">
+            </button>
+        </div>
+        {%if session['user_id'] ==0%}
+        <div class="flex align-center" style="gap:3em">
+            <a href="/login_form" class="log-link">Login</a>
+            <a href="/register_form" class="log-link">Register</a>
+        </div>
+        {%else%}
+        <h1>{{user.username}}</h1>
+        <a href="/signout" class="log-link">Signout</a>
+        {%endif%}
+    </div>
+    <div class="flex just-center">
+        <div class="container">
+            <div class="view-request-title">
+                {{request.title}}
+            </div>
+            <div class="view-request-user">
+                Created By: {{request.user.username}}
+            </div>
+            <div class="flex just-center">
+                <div class="view-request-content">
+                    {{request.description}}
+                </div>
+            </div>
+            {%if session['user_id']==request.user.id%}
+            <div class="flex just-center" style="margin-bottom: 2em;">
+                <div class="flex just-between" style="width:25%">
+                    <a href="/edit_request/{{request.id}}" class="log-link">Edit Request</a>
+                    <a href="/delete_request/{{request.id}}" class="log-link">Delete Request</a>
+                </div>
+            </div>
+            {%endif%}
+            <a href="/view_game/{{request.game.id}}" class="flex just-center log-link">Go back</a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>View Game</title>
+</head>
+
+<body>
+    <input type="hidden" value="{{id}}" id="id">
+    <div class="navbar">
+        <a href="/" style="text-decoration: none;">
+            <h1><span style="color:rgb(133, 111, 255)">Fan</span><span style="color:rgb(0, 163, 41)">Requests</span>
+            </h1>
+        </a>
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Seach For Games">
+            <button>
+                <img src="{{url_for('static',filename='imgs/search-magnifying-glass.png')}}" alt="Search"
+                    style="width:25px">
+            </button>
+        </div>
+        {%if session['user_id'] ==0%}
+        <div class="flex align-center" style="gap:3em">
+            <a href="/login_form" class="log-link">Login</a>
+            <a href="/register_form" class="log-link">Register</a>
+        </div>
+        {%else%}
+        <h1>{{user.username}}</h1>
+        <a href="/signout" class="log-link">Signout</a>
+        {%endif%}
+    </div>
+    <div class="flex just-center">
+        <div class="container">
+            <div id="banner">
+                <div class="game-header-image"
+                style="background-image: url(https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg);">
+            </div>
+            <div class="game-header-text">
+                <span style="background-color:rgb(221, 198, 170); padding:.125em .25em .125em .25em">Grand Theft Auto
+                    V</span>
+            </div>
+            </div>
+            <div class="flex just-center" style="margin-bottom: 3em;">
+                <form action="/create_request_form/{{id}}">
+                    <input type="submit" value="Create Request">
+                </form>
+            </div>
+            {%for request in requests%}
+            <a href="/view_request/{{request.id}}" class="flex just-center" style="text-decoration: none;">
+                <div class="request-box flex" style="gap:1em">
+                    <div class="flex-column align-center just-between">
+                        <form action="">
+                            <button class="like-button">
+                                <img src="{{url_for('static',filename='imgs/up-arrow-hollow.png')}}" alt="up-arrow" style="width:2.5em">
+                            </button>
+                        </form>
+                        <span class="like-count">0</span>
+                        <form action="">
+                            <button class="like-button">
+                                <img src="{{url_for('static',filename='imgs/down-arrow-hollow.png')}}" alt="up-arrow" style="width:2.5em;">
+                            </button>
+                        </form>
+                    </div>
+                    <div>
+                        <div class="request-header">
+                            <span class="request-title">{{request.title}}</span>
+                            <span class="request-user"> Created by: {{request.user.username}}</span>
+                        </div>
+                        <span class="request-desc">{{request.description}}</span>
+                    </div>
+                </div>
+            </a>
+            {%endfor%}
+        </div>
+    </div>
+    <script src="{{url_for('static',filename='script.js')}}"></script>
+</body>
+
+</html>

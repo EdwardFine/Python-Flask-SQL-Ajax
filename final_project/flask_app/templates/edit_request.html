@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>View Game</title>
+</head>
+
+<body>
+    <input type="hidden" value="{{request.game.id}}" id="id">
+    <div class="navbar">
+        <a href="/" style="text-decoration: none;">
+            <h1><span style="color:rgb(133, 111, 255)">Fan</span><span style="color:rgb(0, 163, 41)">Requests</span>
+            </h1>
+        </a>
+        <div class="search-box">
+            <input type="text" class="search-input" placeholder="Seach For Games">
+            <button>
+                <img src="{{url_for('static',filename='imgs/search-magnifying-glass.png')}}" alt="Search"
+                    style="width:25px">
+            </button>
+        </div>
+        {%if session['user_id'] ==0%}
+        <div class="flex align-center" style="gap:3em">
+            <a href="/login_form" class="log-link">Login</a>
+            <a href="/register_form" class="log-link">Register</a>
+        </div>
+        {%else%}
+        <h1>{{user.username}}</h1>
+        <a href="/signout" class="log-link">Signout</a>
+        {%endif%}
+    </div>
+    <span class="motto-title flex just-center" style="margin:1em 0 1em 0">Editing request for: {{game.title}}</span>
+    {% with messages = get_flashed_messages() %}    
+    {% if messages %}
+    <div class="flex just-center align-center">                          
+        <div class="flash-box">
+            {% for message in messages %}            
+            <p class="flash-message">{{message}}</p>                   
+            {% endfor %}
+        </div>
+    </div>  
+    {% endif %}
+    {% endwith %}
+    <div class="flex just-center">
+        <div class="container" style="width:80%">
+            <form action="/update_request/{{request.id}}" method="post">
+                <div class="flex just-between align-center" style="margin-bottom: 2em;">
+                    <label for="title">Request Title:</label>
+                    <input type="text" name="title" value="{{request.title}}" placeholder="{{request.title}}">
+                </div>
+                <div style="margin-bottom: 1em;">
+                    <label for="description">Request:</label>
+                </div>
+                <textarea name="description" id="" cols="30" rows="10"
+                    style="width: 100%; margin-bottom:2em;">{{request.description}}</textarea>
+                <div class="flex just-center">
+                    <input type="submit" value="Edit Request">
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

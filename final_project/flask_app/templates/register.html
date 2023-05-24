@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+    <title>Registration</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <a href="/" style="text-decoration: none;">
+            <h1>
+                <span style="color:rgb(133, 111, 255)">Fan</span><span style="color:rgb(0, 163, 41)">Requests</span>
+            </h1>
+        </a>
+    </div>
+    <div class="flex just-center">
+        <div class="container flex just-center">
+            <div class="sign-box">
+                <h1 class="text-align-center" style="color:rgb(197, 144, 11);margin-bottom:1em;">Registration</h1>
+                {% with messages = get_flashed_messages() %}    
+                {% if messages %}                            
+                <div class="flash-box">
+                    {% for message in messages %}            
+                    <p class="flash-message">{{message}}</p>                   
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+                <form action="/register_user" method="post">
+                    <div class="flex just-between align-center">
+                        <label for="username">Username:</label>
+                        <input type="text" name="username">
+                    </div>
+                    <div class="flex just-between align-center">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email">
+                    </div>
+                    <div class="flex just-between align-center">
+                        <label for="password">Password:</label>
+                        <input type="password" name="password">
+                    </div>
+                    <div class="flex just-between align-center" style="margin-bottom: 1em;">
+                        <label for="confirm_password">Confirm Password:</label>
+                        <input type="password" name="confirm_password">
+                    </div>
+                    <div class="flex just-center">
+                        <input type="submit" value="Create User">
+                    </div>
+                    <div class="flex just-center" style="margin-top: 1em;">
+                        <h2>Already a user? <a href="/login_form">Login</a></h2>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
