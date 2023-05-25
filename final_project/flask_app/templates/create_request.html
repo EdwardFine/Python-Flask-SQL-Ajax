@@ -16,13 +16,12 @@
             <h1><span style="color:rgb(133, 111, 255)">Fan</span><span style="color:rgb(0, 163, 41)">Requests</span>
             </h1>
         </a>
-        <div class="search-box">
-            <input type="text" class="search-input" placeholder="Seach For Games">
+        <form id="searchForm" action="/search_results" class="search-box" >
+            <input type="text" name="query" class="search-input" placeholder="Search For Games" id="searchInput">
             <button>
-                <img src="{{url_for('static',filename='imgs/search-magnifying-glass.png')}}" alt="Search"
-                    style="width:25px">
+                <img src="{{url_for('static',filename='imgs/search-magnifying-glass.png')}}" alt="Search" style="width:25px">
             </button>
-        </div>
+        </form>
         {%if session['user_id'] ==0%}
         <div class="flex align-center" style="gap:3em">
             <a href="/login_form" class="log-link">Login</a>
@@ -61,6 +60,7 @@
                     <input type="submit" value="Create Request">
                 </div>
             </form>
+            <form action="/view_game/{{id}}" class="flex just-center" style="margin-top:1em"><input type="submit" value="Go Back"></form>
         </div>
     </div>
 

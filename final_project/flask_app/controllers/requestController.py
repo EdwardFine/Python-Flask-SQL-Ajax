@@ -121,3 +121,16 @@ def add_dislike(request_id):
         return redirect('/login_form')
     User.processLike({'user_id':session['user_id'],'request_id':request_id,"likeValue":0})
     return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+
+# Search Bar
+
+@app.route('/search', methods=["POST"])
+def search():
+    print("SEARCHING")
+    search = request.form['query'].strip().replace(" ","%20")
+    r = requests.get(f"https://api.rawg.io/api/games?key={os.environ.get('RAWG_API_KEY')}&search={search}")
+    return jsonify(r.json())
+
+@app.route('/search_results')
+def search_results():
+    return render_template('search_results.html',user=User.get_one_user_by_id({'id':session['user_id']}))

@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
-    <title>FanRequest Home</title>
+    <title>Search</title>
 </head>
-
-<body>
+<body  onload="search()">
     <div class="navbar">
-        <a href="/" style="text-decoration: none;">
-            <h1><span style="color:rgb(133, 111, 255)">Fan</span><span style="color:rgb(0, 163, 41)">Requests</span>
-            </h1>
-        </a>
+        <a href="/" style="text-decoration: none;"><h1><span style="color:rgb(133, 111, 255)">Fan</span><span style="color:rgb(0, 163, 41)">Requests</span></h1></a>
         <form id="searchForm" action="/search_results" class="search-box" >
             <input type="text" name="query" class="search-input" placeholder="Search For Games" id="searchInput">
             <button>
@@ -31,27 +26,11 @@
         <a href="/signout" class="log-link">Signout</a>
         {%endif%}
     </div>
-    <div class="motto">
-        <img src="{{url_for('static',filename='imgs/empowered_gamer.jpg')}}" alt="" class="motto-img">
-        <div class="motto-text">
-            <span class="motto-title">Empower the Gamer</span><br>
-            <span class="motto-text"> Be the Change you Want in the Gaming Industry</span>
-        </div>
-    </div>
     <div class="flex just-center">
-        <div class="container flex-wrap">
-            <!-- <form action='/check_game' method='post'>
-                <input type='hidden' name='id' value='3498'> <input type='hidden' name='title' value='Grand Theft Auto V'>
-                <button class='game-card'>
-                    <img src='https://media.rawg.io/media/games/456/456dea5e1c7e3cd07060c14e96612001.jpg' class='game-image' alt='grand-theft-auto-v'>
-                    <h1>Grand Theft Auto V</h1>
-                </button>
-            </form> -->
-        </div>
-
+        <span class="search-title">Displaying Search Results For: </span>
     </div>
-
+    <div class="container flex-wrap">
+    </div>
     <script src="{{url_for('static',filename='script.js')}}"></script>
 </body>
-
 </html>

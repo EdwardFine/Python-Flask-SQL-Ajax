@@ -26,8 +26,23 @@ async function viewOneGame(id){
     console.log(game)
 }
 
+async function search(){
+    let params = new URL(document.location).searchParams;
+    let title = document.querySelector(".search-title");
+    title.innerHTML += params.get('query');
+    var form = new FormData();
+    form.append('query',params.get("query"))
+    var res = await fetch("http://localhost:5000/search",{method:'POST',body:form});
+    var games = await res.json();
+    for(var i=0;i<20;i++){
+        console.log(games.results[i])
+        container.innerHTML += `<form action='/check_game' method='post'><input type='hidden' name='id' value='${games.results[i].id}'> <input type='hidden' name='title' value='${games.results[i].name}'><button class='game-card'><img src='${games.results[i].background_image}' class='game-image' alt='${games.results[i].slug}'><h1>${games.results[i].name}</h1></button></form>`;
+    }
+    return games;
+}
+
 if(title.innerText=="FanRequest Home"){
-    console.log(getHomeGames());
+    getHomeGames();
 }else if(title.innerText=="View Game"){
     viewOneGame(id.value)
 }
