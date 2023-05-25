@@ -6,6 +6,8 @@ from flask_app.models.requests import Request
 import requests
 import os
 
+# Home Page
+
 @app.route('/')
 def home():
     if 'user_id' not in session:
@@ -16,6 +18,8 @@ def home():
 def home_games():
     r = requests.get(f"https://api.rawg.io/api/games?key={os.environ.get('RAWG_API_KEY')}")
     return jsonify(r.json())
+
+# Single Game View
 
 @app.route('/single_game/<int:id>')
 def single_game(id):
@@ -32,6 +36,8 @@ def check_game():
     if not Game.checkIfGameInDB({'id':game_id}):
         Game.addGame(request.form)
     return redirect(f'/view_game/{game_id}')
+
+#Create Requests
 
 @app.route('/create_request_form/<int:id>')
 def create_request_form(id):
@@ -56,9 +62,13 @@ def create_request(id):
         Request.createRequest(request_data)
         return redirect(f'/view_game/{id}')
 
+# View Requests
+
 @app.route("/view_request/<int:request_id>")
 def view_request(request_id):
     return render_template("view_request.html",user=User.get_one_user_by_id({'id':session['user_id']}),request = Request.getRequestById({'request_id':request_id}))
+
+# Delete Requests
 
 @app.route("/delete_request/<int:request_id>")
 def delete_request(request_id):
@@ -68,6 +78,8 @@ def delete_request(request_id):
     else:
         Request.deleteRequestById({'request_id':request_id})
         return redirect(f'/view_game/{request.game.id}')
+
+# Edit Requests
 
 @app.route("/edit_request/<int:request_id>")
 def edit_request(request_id):
@@ -94,32 +106,18 @@ def update_request(request_id):
             Request.updateRequestById(request_data)
             return redirect(f'/view_request/{request_id}')
 
+# Process Likes
+
 @app.route('/add_like/<int:request_id>')
 def add_like(request_id):
     if session['user_id']==0:
         return redirect('/login_form')
-    activeUser=User.get_one_user_by_id({'id':session['user_id']})
-    if len(activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id}))==0:
-        User.addLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':1})
-        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
-    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==0:
-        User.updateLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':1})
-        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
-    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==1:
-        User.removeLike({'user_id':session['user_id'],'request_id':request_id})
-        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+    User.processLike({'user_id':session['user_id'],'request_id':request_id,"likeValue":1})
+    return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
 
 @app.route('/add_dislike/<int:request_id>')
 def add_dislike(request_id):
     if session['user_id']==0:
         return redirect('/login_form')
-    activeUser=User.get_one_user_by_id({'id':session['user_id']})
-    if len(activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id}))==0:
-        User.addLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':0})
-        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
-    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==1:
-        User.updateLike({'user_id':session['user_id'],'request_id':request_id,'likeValue':0})
-        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
-    elif activeUser.checkLiked({'user_id':activeUser.id,'request_id':request_id})[0]['isLiked']==0:
-        User.removeLike({'user_id':session['user_id'],'request_id':request_id})
-        return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")
+    User.processLike({'user_id':session['user_id'],'request_id':request_id,"likeValue":0})
+    return redirect(f"/view_game/{Request.getRequestById({'request_id':request_id}).game.id}")

@@ -5,7 +5,7 @@ var id = document.querySelector("#id")
 console.log(id);
 
 async function getHomeGames(){
-    //var res = await fetch("http://localhost:5000/home_games");
+    var res = await fetch("http://localhost:5000/home_games");
     var games = await res.json();
     for(var i=0;i<20;i++){
         console.log(games.results[i])
@@ -15,7 +15,7 @@ async function getHomeGames(){
 }
 
 async function viewOneGame(id){
-    //var res = await fetch(`http://localhost:5000/single_game/${id}`);
+    var res = await fetch(`http://localhost:5000/single_game/${id}`);
     var game = await res.json();
     title.innerText=`Viewing ${game.name}`
     banner.innerHTML=`<div class="game-header-image" style="background-image: url(${game.background_image});">
