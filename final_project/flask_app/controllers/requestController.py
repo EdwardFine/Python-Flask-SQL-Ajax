@@ -126,7 +126,6 @@ def add_dislike(request_id):
 
 @app.route('/search', methods=["POST"])
 def search():
-    print("SEARCHING")
     search = request.form['query'].strip().replace(" ","%20")
     r = requests.get(f"https://api.rawg.io/api/games?key={os.environ.get('RAWG_API_KEY')}&search={search}")
     return jsonify(r.json())

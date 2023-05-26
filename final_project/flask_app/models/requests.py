@@ -93,6 +93,11 @@ class Request:
     @classmethod
     def deleteRequestById(cls,data):
         query="""
+            DELETE FROM request_likes
+            WHERE request_id=%(request_id)s;
+        """
+        results = connectToMySQL(cls.DB).query_db(query,data)
+        query="""
             DELETE FROM requests
             WHERE id=%(request_id)s;
         """
